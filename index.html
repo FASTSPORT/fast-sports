@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fast Sports - Ropa Deportiva Profesional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { margin:0; font-family:'Montserrat',sans-serif; background:#f3f3f3; color:#222; }
+    
+header { 
+  background: linear-gradient(90deg, #0f0f0f 0%, #1a1a1a 50%, #ff3e00 120%);
+  padding:22px 0; 
+  color:white; 
+  position:sticky; 
+  top:0; 
+  z-index:1000;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+    .container{ max-width:1200px; margin:auto; padding:0 16px;}
+    .nav{ display:flex; justify-content:space-between; align-items:center;}
+    .logo{ font-size:26px; font-weight:800; text-transform:uppercase; color:#ff3e00;}
+    .menu a{ margin-left:20px; color:white; text-decoration:none; text-transform:uppercase; font-size:14px;}
+    .menu a:hover{ color:#ff3e00; text-shadow: 0 0 6px rgba(255,62,0,0.6);}
+
+    .hero{
+      background:url('img/fast_sports_hero.jpg') center/cover no-repeat;
+      padding:150px 20px; text-align:center; color:white; position:relative;
+    }
+    .hero::before{
+      content:''; position:absolute; inset:0;
+      background:rgba(0,0,0,0.55);
+    }
+    .hero-inner{ position:relative; max-width:700px; margin:auto;}
+    .hero h1{ font-size:46px; font-weight:800; margin-bottom:10px; text-transform:uppercase;}
+    .hero p{ font-size:18px; margin-bottom:20px;}
+    .btn-primary{
+      background:#ff3e00; padding:14px 26px; color:white; border-radius:6px;
+      font-weight:700; text-decoration:none; text-transform:uppercase;
+    }
+
+    .section{ padding:40px 0;}
+    .section-title{
+      text-align:center; font-size:32px; font-weight:800; text-transform:uppercase; margin-top:40px;
+    }
+    .section-subtitle{
+      text-align:center; font-size:15px; color:#555; max-width:620px; margin:10px auto 0;
+    }
+
+    /* Nosotros */
+    .about{ display:flex; gap:30px; align-items:center; margin-top:30px;}
+    .about img{ width:30%; border-radius:10px; object-fit:cover;}
+    .about-text{ width:50%; font-size:16px; line-height:1.7;}
+
+    /* Servicios */
+    .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:30px;}
+    .service{
+      background: linear-gradient(135deg, #111 0%, #2b2b2b 100%);
+      padding:20px;
+      border-radius:10px;
+      text-align:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+      color: white;
+      border: 1px solid #ff3e00;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .service:hover{
+      transform: translateY(-6px);
+      box-shadow:0 10px 26px rgba(0,0,0,0.35);
+    }
+    .service h3{ color:#ff3e00; font-size:18px; margin-bottom:8px;}
+
+    /* Catalogo */
+    .catalog-grid{
+      overflow: hidden;
+      position: relative;
+      margin-top:30px;
+      cursor: grab;
+    }
+
+    .catalog-carousel{
+      display:flex;
+      gap:16px;
+      width: max-content;
+      animation: scrollCatalog 60s linear infinite;
+    }
+
+    .catalog-carousel:hover{
+      animation-play-state: running;
+    }
+
+    @keyframes scrollCatalog {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .catalog-grid img{
+      width:100%; height:300px; object-fit:cover; border-radius:10px; cursor:pointer;
+      box-shadow:0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    /* Clientes */
+    .clients{
+      display:grid; grid-template-columns:repeat(5,1fr); gap:20px; margin-top:30px;
+    }
+    .client{
+      background:white; padding:16px; border-radius:10px; text-align:center;
+      font-weight:600; box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    /* Contacto */
+    .contact-layout{
+      display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:30px;
+    }
+    .contact-boxes{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    .contact-card{
+      background:white; padding:16px; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    }
+    .contact-card h3{ color:#ff3e00; margin:0 0 6px; font-size:15px; text-transform:uppercase;}
+    .contact-card p{ margin:4px 0; font-size:14px;}
+    .contact-card a{ color:#111; font-weight:600; text-decoration:none;}
+
+    /* Map box */
+    .map-box iframe{
+      width:100%; height:300px; border:0; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    footer{
+      background:#000; padding:30px 0; color:#aaa; text-align:center; margin-top:40px;
+    }
+
+    /* Lightbox */
+    #lightbox{
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:9999;
+    }
+    #lightbox img{ max-width:90%; max-height:90%; border-radius:10px;}
+    #closeLb{
+      position:absolute; top:20px; right:30px; font-size:40px; color:white; cursor:pointer;
+    }
+
+    /* WhatsApp Floating Button */
+    
+.btn-wsp-float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:20px;
+  right:20px;
+  background-color:#25d366;
+  border-radius:50%;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png');
+  background-size:70%;
+  background-position:center;
+  background-repeat:no-repeat;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  cursor:pointer;
+  z-index:10000;
+}
+
+
+    @media(max-width:900px){
+      .about{ flex-direction:column;}
+      .about img, .about-text{ width:100%;}
+      .services{ grid-template-columns:1fr 1fr;}
+      .catalog-grid{ grid-template-columns:1fr 1fr;}
+      .clients{ grid-template-columns:1fr 1fr 1fr;}
+      .contact-layout{ grid-template-columns:1fr;}
+      .contact-boxes{ grid-template-columns:1fr;}
+    }
+    @media(max-width:600px){
+      .services, .catalog-grid, .clients{ grid-template-columns:1fr;}
+    }
+
+  
+
+.info-box{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,0.12);
+  border-left:6px solid #ff3e00;
+  transition:transform .2s;
+  margin-left:auto;
+  width:85%;
+}
+.info-box:hover{
+  transform:scale(1.02);
+}
+
+.info-box:hover{
+  transform:scale(1.02);
+}
+
+
+.btn-wsp-wrapper{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+}
+
+.wsp-tooltip{
+  position: absolute;
+  right: 70px;
+  bottom: 10px;
+  background: #25d366;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+
+.btn-wsp-wrapper:hover .wsp-tooltip{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+.btn-wsp-float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:20px;
+  right:20px;
+  background-color:#25d366;
+  border-radius:50%;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png');
+  background-size:70%;
+  background-position:center;
+  background-repeat:no-repeat;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  cursor:pointer;
+  z-index:10000;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">Fast Sports</div>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <h1>Ropa deportiva profesional</h1>
+    <p>Producción avanzada, diseño moderno y telas de alto rendimiento.</p>
+    <a href="#contacto" class="btn-primary">Contáctanos</a>
+  </div>
+</section>
+
+<section class="section container" id="nosotros">
+  <h2 class="section-title">Nosotros</h2>
+  <p class="section-subtitle">Ropa deportiva premium para equipos, academias y marcas deportivas.</p>
+  <div class="about">
+    <img src="img/about_fs.jpg" alt="Fast Sports" />
+    <div class="about-text"><div class="info-box">Fast Sports combina tecnología textil, procesos de confección modernos y experiencia profesional para crear indumentaria deportiva de alta durabilidad y rendimiento.<br><br>Además contamos con altos estándares de control, acabados profesionales y asesoría personalizada para ayudarte a crear la indumentaria perfecta para tu equipo o marca.</div></div>
+  </div>
+</section>
+
+<section class="section container" id="servicios">
+  <h2 class="section-title">Servicios</h2>
+  <div class="services">
+    <div class="service"><h3>Diseño personalizado</h3><p>Modelos únicos con tus colores y escudos.</p></div>
+    <div class="service"><h3>Sublimación HD</h3><p>Colores vivos, duraderos y con máxima definición.</p></div>
+    <div class="service"><h3>Producción rápida</h3><p>Para equipos, academias y empresas.</p></div>
+    <div class="service"><h3>Servicio de Tapetera</h3><p>Costuras reforzadas para prendas deportivas.</p></div>
+    <div class="service"><h3>Servicio de Elastiquera</h3><p>Colocación profesional de elásticos.</p></div>
+    <div class="service"><h3>Servicio de Bastera</h3><p>Armado y fijación previa de prendas.</p></div>
+    <div class="service"><h3>Servicio de Corta Cinta</h3><p>Corte preciso de cintas y acabados.</p></div>
+    <div class="service"><h3>Servicio en General</h3><p>Todos los procesos textiles en un solo lugar.</p></div>
+
+  </div>
+</section>
+
+<section class="section container" id="catalogo">
+  <h2 class="section-title">Catálogo</h2>
+  <div class="catalog-grid">
+    <div class="catalog-carousel" id="carouselTrack">
+    <img src="img/cat1.jpg" onclick="openLb(this.src)">
+    <img src="img/cat2.jpg" onclick="openLb(this.src)">
+    <img src="img/cat3.jpg" onclick="openLb(this.src)">
+    <img src="img/cat4.jpg" onclick="openLb(this.src)">
+    <img src="img/cat5.jpg" onclick="openLb(this.src)">
+    <img src="img/cat6.jpg" onclick="openLb(this.src)">
+    <img src="img/cat7.jpg" onclick="openLb(this.src)">
+    <img src="img/cat8.jpg" onclick="openLb(this.src)">
+    <img src="img/cat9.jpg" onclick="openLb(this.src)">
+
+    <!-- DUPLICADO PARA EFECTO INFINITO -->
+    <img src="img/cat1.jpg" onclick="openLb(this.src)">
+    <img src="img/cat2.jpg" onclick="openLb(this.src)">
+    <img src="img/cat3.jpg" onclick="openLb(this.src)">
+    <img src="img/cat4.jpg" onclick="openLb(this.src)">
+    <img src="img/cat5.jpg" onclick="openLb(this.src)">
+    <img src="img/cat6.jpg" onclick="openLb(this.src)">
+    <img src="img/cat7.jpg" onclick="openLb(this.src)">
+    <img src="img/cat8.jpg" onclick="openLb(this.src)">
+    <img src="img/cat9.jpg" onclick="openLb(this.src)">
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section container" id="contacto">
+  <h2 class="section-title">Contacto</h2>
+  <p class="section-subtitle">Comunícate con nosotros mediante WhatsApp, llamadas, Facebook o visitando nuestra ubicación.</p>
+
+  <div class="contact-layout">
+    <div>
+      
+<div class="contact-boxes">
+  <div class="contact-card">
+    <h3>WhatsApp</h3>
+    <p><a href="https://wa.me/51941955856" target="_blank">941 955 856</a></p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Llamadas</h3>
+    <p><a href="tel:+51941955856">941 955 856</a></p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Facebook</h3>
+    <p><a href="https://facebook.com" target="_blank">Fast Sports Oficial</a></p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Correo</h3>
+    <p>
+      <a href="mailto:matiasmiunicohijoadorado1730@gmail.com">
+        matiasmiunicohijoadorado1730@gmail.com
+      </a>
+    </p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Dirección</h3>
+    <p>
+      <a href="https://maps.app.goo.gl/Qqup1jj6F3umRUY27" target="_blank">
+        Mz O Lt 11 Cuarta Etapa Chillón
+      </a>
+    </p>
+  </div>
+</div>
+    </div>
+
+
+    <div class="map-box">
+      
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.760383876153!2d-77.07677679999999!3d-11.921756900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105d1c1d0a34417%3A0x4906af03c21fb53c!2sFAST%20SPORT!5e0!3m2!1ses-419!2spe!4v1765064243998!5m2!1ses-419!2spe" width="100%" height="300" style="border:0;border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Fast Sports · Fabricantes de Ropa Deportiva Profesional</footer>
+
+<div id="lightbox" onclick="closeLb()">
+  <span id="closeLb">×</span>
+  <img id="lbImg">
+</div>
+
+<script>
+function openLb(src){ document.getElementById('lbImg').src = src; document.getElementById('lightbox').style.display='flex'; }
+function closeLb(){ document.getElementById('lightbox').style.display='none'; }
+</script>
+
+
+<div class="btn-wsp-wrapper">
+  <div class="wsp-tooltip">¡Contáctanos!</div>
+  <a href="https://wa.me/51941955856" class="btn-wsp-float" target="_blank"></a>
+</div>
+
+
+
+<script>
+const track = document.getElementById("carouselTrack");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+track.addEventListener("mousedown", (e) => {
+  isDown = true;
+  startX = e.pageX - track.offsetLeft;
+  scrollLeft = track.scrollLeft;
+});
+
+track.addEventListener("mouseleave", () => {
+  isDown = false;
+});
+
+track.addEventListener("mouseup", () => {
+  isDown = false;
+});
+
+track.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - track.offsetLeft;
+  const walk = (x - startX) * 2;
+  track.scrollLeft = scrollLeft - walk;
+});
+</script>
+
+
+<script>
+const track = document.getElementById("carouselTrack");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+// MOUSE DRAG
+track.addEventListener("mousedown", (e) => {
+  isDown = true;
+  startX = e.pageX - track.offsetLeft;
+  scrollLeft = track.scrollLeft;
+});
+
+track.addEventListener("mouseleave", () => {
+  isDown = false;
+});
+
+track.addEventListener("mouseup", () => {
+  isDown = false;
+});
+
+track.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - track.offsetLeft;
+  const walk = (x - startX) * 2;
+  track.scrollLeft = scrollLeft - walk;
+});
+
+// TOUCH DRAG (MOBILE)
+track.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].pageX - track.offsetLeft;
+  scrollLeft = track.scrollLeft;
+});
+
+track.addEventListener("touchmove", (e) => {
+  const x = e.touches[0].pageX - track.offsetLeft;
+  const walk = (x - startX) * 2;
+  track.scrollLeft = scrollLeft - walk;
+});
+</script>
+
+</body>
+</html>
